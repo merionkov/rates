@@ -1,0 +1,48 @@
+apply plugin: extPlugins.android.application
+apply plugin: extPlugins.android.kotlin
+
+android {
+    compileSdkVersion androidSdk.compile
+    buildToolsVersion androidBuildToolsVersion
+    defaultConfig {
+        applicationId 'org.merionkov.rates'
+        minSdkVersion androidSdk.min
+        targetSdkVersion androidSdk.target
+        versionCode 1
+        versionName '0.1'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility jvm.source
+        targetCompatibility jvm.target
+    }
+    sourceSets {
+        main.java.srcDirs = ['src/main/kotlin']
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libraries.kotlinStd
+    implementation libraries.appCompat
+    implementation libraries.recyclerView
+    implementation libraries.retrofit.core
+    implementation libraries.retrofit.gson
+    testImplementation libraries.hamcrest
+    testImplementation libraries.junit
+    androidTestImplementation libraries.androidJunit
+    androidTestImplementation libraries.androidEspresso
+}
