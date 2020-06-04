@@ -1,5 +1,6 @@
 apply plugin: extPlugins.android.application
 apply plugin: extPlugins.android.kotlin
+apply plugin: extPlugins.android.kapt
 
 android {
     compileSdkVersion androidSdk.compile
@@ -16,11 +17,13 @@ android {
         release {
             debuggable false
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             debuggable true
             minifyEnabled false
+            shrinkResources false
         }
     }
     compileOptions {
@@ -41,6 +44,11 @@ dependencies {
     implementation libraries.recyclerView
     implementation libraries.retrofit.core
     implementation libraries.retrofit.gson
+    implementation libraries.glide
+    implementation libraries.moxy.core
+    implementation libraries.moxy.androidx
+    implementation libraries.moxy.ktx
+    kapt libraries.moxy.apt
     testImplementation libraries.hamcrest
     testImplementation libraries.junit
     androidTestImplementation libraries.androidJunit

@@ -4,7 +4,10 @@
     package="org.merionkov.rates"
     >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".RatesApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
@@ -12,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup"
-        />
+        >
+
+        <activity android:name=".ui.RatesActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+    </application>
 
 </manifest>

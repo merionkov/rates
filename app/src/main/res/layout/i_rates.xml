@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    tools:showIn="@layout/a_rates"
+    >
+
+    <ImageView
+        android:id="@+id/currencyIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        tools:ignore="ContentDescription"
+        tools:scaleType="centerCrop"
+        tools:src="@drawable/ic_currency"
+        />
+
+    <TextView
+        android:id="@+id/currencyCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_toStartOf="@id/currencyRate"
+        android:layout_toEndOf="@id/currencyIcon"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:textColor="@color/textBlack"
+        android:textSize="16sp"
+        tools:text="USD"
+        />
+
+    <TextView
+        android:id="@+id/currencyDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/currencyCode"
+        android:layout_alignStart="@id/currencyCode"
+        android:layout_alignEnd="@id/currencyCode"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/textGrey"
+        android:textSize="14sp"
+        tools:text="US Dollar"
+        />
+
+    <EditText
+        android:id="@+id/currencyRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:maxLength="9"
+        android:maxLines="1"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:textSize="20sp"
+        tools:ignore="LabelFor"
+        tools:text="1183.06"
+        />
+
+</RelativeLayout>

@@ -1,3 +1,5 @@
 <resources>
-    <string name="appName">Test App</string>
+    <string name="appName">Rates</string>
+    <string name="errorUnknown">Unknown error</string>
+    <string name="errorNetwork">Network error</string>
 </resources>
