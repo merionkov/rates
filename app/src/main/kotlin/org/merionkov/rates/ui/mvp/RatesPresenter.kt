@@ -10,6 +10,7 @@ import java.io.IOException
 private const val UPDATE_DELAY_MS = 1000L
 private const val DEFAULT_CURRENCY_CODE = "EUR"
 private const val DEFAULT_CURRENCY_RATE = 1f
+private const val FETCH_BASE_CURRENCY_CODE = "EUR"
 
 class RatesPresenter(
     private val ratesFetcher: CurrenciesRatesFetcher,
@@ -36,7 +37,7 @@ class RatesPresenter(
         resetState()
         viewState.showProgressBar()
         workManager.repeatOnBackground(UPDATE_DELAY_MS) {
-            execute { updateRates(ratesFetcher.fetch(baseCurrencyCode)) }
+            execute { onNewRatesReceived(ratesFetcher.fetch(FETCH_BASE_CURRENCY_CODE)) }
         }
     }
 
@@ -84,12 +85,18 @@ class RatesPresenter(
     }
 
     @Synchronized
-    private fun updateRates(newRates: List<CurrencyRateEntity>) {
+    private fun onNewRatesReceived(newRates: List<CurrencyRateEntity>) {
+        val actualBaseCurrencyCode = baseCurrencyCode
         val actualBaseCurrencyRate = baseCurrencyRate
         val actualRatesList = ratesList
 
+        val fetchedBaseRate = newRates.firstOrNull { it.code == actualBaseCurrencyCode }
+            ?: error("Base currency rate not found in fetched rates")
+
+        val baseRateMultiplier = actualBaseCurrencyRate / fetchedBaseRate.rate
+
         val newRatesMap = newRates.map {
-            it.code to it.copy(rate = it.rate * actualBaseCurrencyRate)
+            it.code to it.copy(rate = it.rate * baseRateMultiplier)
         }.toMap()
 
         val newRatesList = actualRatesList?.mapNotNull { newRatesMap[it.code] } ?: newRates
