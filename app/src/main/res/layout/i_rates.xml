@@ -58,7 +58,7 @@
         android:fontFamily="sans-serif-medium"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:maxLength="9"
+        android:maxWidth="160dp"
         android:maxLines="1"
         android:paddingTop="4dp"
         android:paddingBottom="8dp"
